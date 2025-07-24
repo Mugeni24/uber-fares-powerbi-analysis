@@ -89,17 +89,52 @@ You will see that the  output will be looking like this:
 
 
 
-### 3. 🧠 Feature Engineering
-- **New Features**: Extracted `pickup_hour`, `pickup_day`, `pickup_month`, and `pickup_dayofweek` for temporal analysis.  
-- **Distance Calculation**: Computed `trip_distance_km` using the haversine formula for precise geospatial insights.  
+### 3. 🧠 Features Engineering
+The analysis of the Uber dataset reveals that fare amounts are strongly correlated with trip distance. Most rides are short, with fares typically under $20, and the highest concentration of pickups is in Manhattan. Time of day also influences fare variability, with more fluctuation in prices during evening hours. 
 - **Output**: Exported the enriched dataset as `uber_fares_enhanced.csv`.  
+
+#### 1. Distribution of Uber Fare Amounts and Trip Distances
+- **🔍 Observation**:
+Most Uber fares are under $20, and most trips are short. However, there are notable outliers with unusually high fares and long distances.
+
+- **💡 Insight**:
+Uber’s business is largely made up of short-to-medium trips. High-fare outliers may result from long-distance rides, surge pricing, or rare events. These should be flagged for deeper operational review or error checking.
+
+
 
 <img width="1005" height="444" alt="feature1" src="https://github.com/user-attachments/assets/1086d0d6-96c1-4515-8de6-857810a9eac2" />
 
+---
+#### 2. Distribution of Uber Fare Amounts (from $0 to $$0 to $100)
+- **🔍 Observation**:
+Most rides fall within the $5–$10 range, with the frequency of trips dropping as the fare increases.
+
+- **💡 Insight**:
+The service is primarily used for affordable, short trips. This can guide pricing models, promotions, or package offers focused on budget-conscious customers.
+
+
+
 <img width="856" height="418" alt="feature2" src="https://github.com/user-attachments/assets/39324b1f-a798-4fe6-8a21-f6dac9aa2251" />
 
+---
+#### 3.Relationship between Trip Distance and Fare Amount & Impact of the Hour of the Day on Fare Amount
+##### Scatter Plot: Distance vs Fare Amount
+- **🔍 Observation**:
+There’s a clear positive linear relationship — the longer the trip, the higher the fare.
+
+- **💡 Insight**:
+Fare is strongly driven by distance, which is expected. This validates pricing models and supports predictive fare estimation tools for riders and planners.
+
+##### Boxplot: Hour of Day vs Fare Amount
+- **🔍 Observation**:
+Fare variation increases in the evening hours, with wider ranges and higher outliers — even though median fares stay stable.
+
+- **💡 Insight**:
+There is greater fare variability at night, likely due to surge pricing or longer rides. This insight can help Uber adjust availability, pricing, or driver incentives during peak hours.
 
 <img width="1170" height="453" alt="feature3" src="https://github.com/user-attachments/assets/fe5f24b5-2ec6-42ae-9a89-18fd2c0d402d" />
+
+
 
 ---
 
