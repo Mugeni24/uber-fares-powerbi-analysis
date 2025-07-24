@@ -101,8 +101,8 @@ You will see that the  output will be looking like this:
 ### 4. 📊 Power BI Visualizations
 A suite of compelling visuals brings the data to life, offering intuitive insights into Uber’s operational patterns.
 
-#### 🌅 Visual 1: Fare vs. Distance
-- **Type**: Clustered Column Chart  
+#### 📏 Visual 1: Fare vs. Distance
+- **Type**: Scatter Plot
 - **Axis**: `distance`  
 - **Values**: Count of `fare_amount`  
 - **Insight**:Relationship between trip length and fare. Outliers could show flat-rate rides or errors.
@@ -112,17 +112,17 @@ A suite of compelling visuals brings the data to life, offering intuitive insigh
 ---
 
 #### 💸 Visual 2: Average Fare by Hour
-- **Type**: Clustered Column Chart  
+- **Type**: Line Chart  
 - **Axis**: `pickup_hour`  
 - **Values**: Average of `fare_amount`  
 - **Insight**: Highlights fare fluctuations, informing dynamic pricing strategies.  
 
-<img width="293" height="265" alt="thi" src="https://github.com/user-attachments/assets/735d4139-ee95-41d9-acf4-c043d3cf5e24" />
+<img width="240" height="241" alt="average by hour" src="https://github.com/user-attachments/assets/56d69a7b-d9bc-4cb5-b309-bb79b18660a0" />
 
 ---
 
 #### 📅 Visual 3: Fare Distribution by Day of Week
-- **Type**: Clustered Bar Chart  
+- **Type**: Clustered Column Chart  
 - **Axis**: `pickup_dayofweek`  
 - **Values**: `fare_amount`  
 - **Insight**: Uncovers weekly fare trends, aiding operational planning.  
@@ -141,7 +141,7 @@ A suite of compelling visuals brings the data to life, offering intuitive insigh
 
 ---
 #### 📆 Monthly Trend Line
-- **Type**: Clustered Bar Chart  
+- **Type**: Area Chart  
 - **Axis**: `month`  
 - **Values**: `fare_amount`  
 - **Insight**: Uncovers monthly fare trends, aiding operational planning.  
@@ -160,7 +160,7 @@ A suite of compelling visuals brings the data to life, offering intuitive insigh
 - **Purpose**: Empowers stakeholders to explore data effortlessly and derive insights in real-time.  
 
 
-<img width="809" height="458" alt="DAshboard" src="https://github.com/user-attachments/assets/b9d3d692-2688-4645-bd1a-8123fa11a6f8" />
+<img width="842" height="465" alt="updated" src="https://github.com/user-attachments/assets/d3115c7f-2d5c-4313-a941-33b57983d2c4" />
 
 ---
 
