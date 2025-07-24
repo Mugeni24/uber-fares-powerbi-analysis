@@ -1,4 +1,4 @@
-# 🌌 Unveiling Uber's Fare Dynamics: A Power BI Odyssey
+# 🌌 Unveiling Uber's Fare Dynamics
 
 **Course:** Introduction to Big Data Analytics – INSY 8413  
 **Instructor:** Eric Maniraguha ([📧 eric.maniraguha@auca.ac.rw](mailto:eric.maniraguha@auca.ac.rw))  
