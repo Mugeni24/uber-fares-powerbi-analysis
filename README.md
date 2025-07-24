@@ -7,7 +7,7 @@
 **Dataset Source:** [Uber Fares Dataset](https://www.kaggle.com/datasets/yasserh/uber-fares-dataset) (Kaggle)  
 **Student Name:** MUGENI Cynthia  
 **Student ID:** 26600  
-**GitHub Repository:** [Explore the Code](https://github.com/your-username/uber-fares-analysis)
+**GitHub Repository:** [Explore the Code](https://github.com/Mugeni24/uber-fares-powerbi-analysis)
 
 ---
 
@@ -39,9 +39,55 @@ Embark on a data-driven journey to unravel the intricacies of Uber’s fare dyna
 - **Cleaning**: Eliminated missing values and extreme outliers in fare and distance fields.  
 - **Transformation**: Converted timestamps to proper datetime formats for seamless analysis.  
 
-![Data Cleaning](https://github.com/user-attachments/assets/82c4370d-fac7-46c7-adf6-78286f2669bf)
+```python
+import numpy as np
 
----
+# Drop rows with missing values
+uber_df_clean = uber_df.dropna()
+
+# Remove fares less than or equal to zero
+uber_df_clean = uber_df_clean[uber_df_clean['fare_amount'] > 0]
+
+# Remove unrealistic passenger counts (keep 1 to 6)
+uber_df_clean = uber_df_clean[(uber_df_clean['passenger_count'] >= 1) & (uber_df_clean['passenger_count'] <= 6)]
+
+# Define plausible NYC longitude and latitude ranges
+# NYC approx longitude: -74.05 to -73.75
+# NYC approx latitude: 40.63 to 40.85
+
+lon_min, lon_max = -74.05, -73.75
+lat_min, lat_max = 40.63, 40.85
+
+# Filter pickup coordinates
+uber_df_clean = uber_df_clean[
+    (uber_df_clean['pickup_longitude'].between(lon_min, lon_max)) &
+    (uber_df_clean['pickup_latitude'].between(lat_min, lat_max))
+]
+
+# Filter dropoff coordinates
+uber_df_clean = uber_df_clean[
+    (uber_df_clean['dropoff_longitude'].between(lon_min, lon_max)) &
+    (uber_df_clean['dropoff_latitude'].between(lat_min, lat_max))
+]
+
+# Convert pickup_datetime from string to datetime type
+uber_df_clean['pickup_datetime'] = pd.to_datetime(uber_df_clean['pickup_datetime'], errors='coerce')
+
+# Drop any rows where datetime conversion failed (NaT)
+uber_df_clean = uber_df_clean.dropna(subset=['pickup_datetime'])
+
+# Drop unnecessary columns, like 'Unnamed: 0' and 'key' if not needed
+uber_df_clean = uber_df_clean.drop(columns=['Unnamed: 0', 'key'])
+
+# Check the cleaned dataset
+print("Cleaned dataset shape:", uber_df_clean.shape)
+uber_df_clean.head()
+```
+
+You will see that the  output will be looking like this:
+<img width="836" height="239" alt="second 1" src="https://github.com/user-attachments/assets/f041c7cf-73be-4243-912a-5fb87de5c264" />
+
+
 
 ### 3. 🧠 Feature Engineering
 - **New Features**: Extracted `pickup_hour`, `pickup_day`, `pickup_month`, and `pickup_dayofweek` for temporal analysis.  
@@ -55,13 +101,13 @@ Embark on a data-driven journey to unravel the intricacies of Uber’s fare dyna
 ### 4. 📊 Power BI Visualizations
 A suite of compelling visuals brings the data to life, offering intuitive insights into Uber’s operational patterns.
 
-#### 🌅 Visual 1: Rides by Hour of Day
+#### 🌅 Visual 1: Fare vs. Distance
 - **Type**: Clustered Column Chart  
-- **Axis**: `pickup_hour`  
+- **Axis**: `distance`  
 - **Values**: Count of `fare_amount`  
-- **Insight**: Reveals peak ride times, guiding demand-based resource allocation.  
+- **Insight**:Relationship between trip length and fare. Outliers could show flat-rate rides or errors.
 
-![Rides by Hour](https://github.com/user-attachments/assets/f6075861-3664-483f-8b66-d2275344cdbc)
+<img width="435" height="238" alt="Screenshot (6)" src="https://github.com/user-attachments/assets/1fbd797e-4d5d-4227-913e-9e702f1e5e8d" />
 
 ---
 
@@ -71,7 +117,7 @@ A suite of compelling visuals brings the data to life, offering intuitive insigh
 - **Values**: Average of `fare_amount`  
 - **Insight**: Highlights fare fluctuations, informing dynamic pricing strategies.  
 
-![Average Fare by Hour](https://github.com/user-attachments/assets/9bcd40f4-3cc5-4cb6-acc6-9472b11bfbbb)
+<img width="293" height="265" alt="thi" src="https://github.com/user-attachments/assets/735d4139-ee95-41d9-acf4-c043d3cf5e24" />
 
 ---
 
@@ -81,26 +127,28 @@ A suite of compelling visuals brings the data to life, offering intuitive insigh
 - **Values**: `fare_amount`  
 - **Insight**: Uncovers weekly fare trends, aiding operational planning.  
 
-![Fare by Day](https://github.com/user-attachments/assets/7d6e032b-ef46-4305-a925-19c1e8ea5667)
+<img width="268" height="226" alt="amountby day" src="https://github.com/user-attachments/assets/e0999d18-4eae-4961-b5f3-dcfb5116a78b" />
+
 
 ---
 
-#### 📍 Visual 4: Fare vs. Trip Distance
-- **Type**: Scatter Plot  
-- **X-Axis**: `trip_distance_km`  
-- **Y-Axis**: `fare_amount`  
-- **Details**: Optional `passenger_count` for deeper segmentation.  
-- **Insight**: Visualizes the relationship between distance and fare, exposing pricing patterns.  
-
-![Fare vs Distance](https://github.com/user-attachments/assets/6ae1c44a-bbe4-4f29-91b5-b0e90b800ea7)
-
----
-
-#### 🗺️ Visual 5: Pickup Locations (Alternative)
+#### 🗺️ Visual 4: Pickup Locations (Alternative)
 - **Type**: Line and Stacked Column Chart (due to map unavailability)  
 - **Insight**: Approximates geospatial distribution of rides for strategic market analysis.  
 
-![Pickup Locations](https://github.com/user-attachments/assets/bb393e92-d274-4671-bfbc-90b0de70e302)
+<img width="349" height="288" alt="map" src="https://github.com/user-attachments/assets/6201ffdc-ce42-48b5-b636-cd324aa8a153" />
+
+
+---
+#### 📆 Monthly Trend Line
+- **Type**: Clustered Bar Chart  
+- **Axis**: `month`  
+- **Values**: `fare_amount`  
+- **Insight**: Uncovers monthly fare trends, aiding operational planning.  
+
+<img width="293" height="275" alt="fareamountmont" src="https://github.com/user-attachments/assets/e75b2e1b-b559-4d23-9c9a-a7a07e89dfce" />
+
+
 
 ---
 
@@ -111,7 +159,8 @@ A suite of compelling visuals brings the data to life, offering intuitive insigh
   - Polished chart titles, vibrant colors, and intuitive tooltips.  
 - **Purpose**: Empowers stakeholders to explore data effortlessly and derive insights in real-time.  
 
-![Dashboard](https://github.com/user-attachments/assets/2c28a603-b583-45d1-87a0-8872be647ffc)
+
+<img width="809" height="458" alt="DAshboard" src="https://github.com/user-attachments/assets/b9d3d692-2688-4645-bd1a-8123fa11a6f8" />
 
 ---
 
@@ -130,7 +179,7 @@ The comprehensive report encapsulates the project’s journey and findings:
 
 ## 📬 Submission Checklist
 - [x] **Power BI File**: `.pbix` file with interactive dashboard.  
-- [x] **Datasets**: Cleaned and enhanced `uber_enhanced.csv`.  
+- [x] **Datasets**: Cleaned and enhanced `uber_fares_enhanced.csv`.  
 - [x] **Jupyter Notebook**: Python code for data processing.  
 - [x] **Screenshots**: Visuals stored in `visuals/` or `screenshots/` folder.  
 - [x] **README**: This beautifully crafted document.  
@@ -146,8 +195,8 @@ This project is an original work, crafted through meticulous analysis and visual
 
 ## 🌐 Explore the Project
 Dive into the code, visuals, and insights:  
-👉 **GitHub Repository**: [Uber Fares Analysis](https://github.com/your-username/uber-fares-analysis)  
-👉 **Dataset**: [Kaggle Uber Fares Dataset](https://www.kaggle.com/datasets/yasserh/uber-fares-dataset)  
+👉 **GitHub Repository**: [Uber Fares Analysis](https://github.com/your-Mugeni24/uber-fares-powerbi-analysis)  
+👉 **Dataset**: [Kaggle Uber Fares Dataset](https://www.kaggle.com/datasets/yasser/uber-fares-dataset)  
 
 ---
 
