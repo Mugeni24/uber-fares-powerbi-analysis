@@ -92,11 +92,17 @@ You will see that the  output will be looking like this:
 ### 3. 🧠 Feature Engineering
 - **New Features**: Extracted `pickup_hour`, `pickup_day`, `pickup_month`, and `pickup_dayofweek` for temporal analysis.  
 - **Distance Calculation**: Computed `trip_distance_km` using the haversine formula for precise geospatial insights.  
-- **Output**: Exported the enriched dataset as `uber_enhanced.csv`.  
+- **Output**: Exported the enriched dataset as `uber_fares_enhanced.csv`.  
 
-![Feature Engineering](screenshots/feature_engineering.png)
+<img width="1005" height="444" alt="feature1" src="https://github.com/user-attachments/assets/1086d0d6-96c1-4515-8de6-857810a9eac2" />
+
+<img width="856" height="418" alt="feature2" src="https://github.com/user-attachments/assets/39324b1f-a798-4fe6-8a21-f6dac9aa2251" />
+
+
+<img width="1170" height="453" alt="feature3" src="https://github.com/user-attachments/assets/fe5f24b5-2ec6-42ae-9a89-18fd2c0d402d" />
 
 ---
+
 
 ### 4. 📊 Power BI Visualizations
 A suite of compelling visuals brings the data to life, offering intuitive insights into Uber’s operational patterns.
@@ -173,15 +179,14 @@ The comprehensive report encapsulates the project’s journey and findings:
 - **Conclusion**: Summarizes findings and their implications.  
 - **Recommendations**: Offers strategic suggestions, such as peak-hour optimizations and pricing adjustments.  
 
-📄 [View Report](Report.pdf) | [View Presentation](Report.pptx)
+
 
 ---
 
 ## 📬 Submission Checklist
 - [x] **Power BI File**: `.pbix` file with interactive dashboard.  
 - [x] **Datasets**: Cleaned and enhanced `uber_fares_enhanced.csv`.  
-- [x] **Jupyter Notebook**: Python code for data processing.  
-- [x] **Screenshots**: Visuals stored in `visuals/` or `screenshots/` folder.  
+- [x] **Jupyter Notebook**: Python code for data processing.   
 - [x] **README**: This beautifully crafted document.  
 - [x] **Final Report**: Submitted as PDF or PowerPoint.  
 - [x] **GitHub**: Public repository with link shared with the instructor.  
@@ -193,12 +198,6 @@ This project is an original work, crafted through meticulous analysis and visual
 
 ---
 
-## 🌐 Explore the Project
-Dive into the code, visuals, and insights:  
-👉 **GitHub Repository**: [Uber Fares Analysis](https://github.com/your-Mugeni24/uber-fares-powerbi-analysis)  
-👉 **Dataset**: [Kaggle Uber Fares Dataset](https://www.kaggle.com/datasets/yasser/uber-fares-dataset)  
-
----
 
 ## ✨ Why This Project Shines
 This project transforms raw data into a compelling narrative, blending technical precision with visual elegance. The interactive Power BI dashboard not only informs but inspires, offering stakeholders a clear lens into Uber’s operational dynamics. From cleaned data to actionable insights, every step reflects a commitment to excellence and innovation.
