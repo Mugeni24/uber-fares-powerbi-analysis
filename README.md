@@ -1,7 +1,4 @@
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]([https://colab.research.google.com/your-notebook-url](https://colab.research.google.com/drive/11Y-qT8B_T7NQlpNfsatH6-rvdbSYFY7y?usp=sharing))
-
-
 # 🌌 Unveiling Uber's Fare Dynamics
 
 
@@ -267,7 +264,8 @@ Uber’s NYC data reflects the city's fast-paced lifestyle, where short, afforda
 - 📁 **Dataset**: Cleaned dataset `uber_fares_enhanced.csv`  
 - 📓 **Jupyter Notebook**: Python code for data processing and visualization  
 - 📄 **README**: This detailed documentation  
-- 🌐 **GitHub Repository**: Public repo shared with the instructor  
+- 🌐 **GitHub Repository**: Public repo shared with the instructor
+- 🔗 **Link to uber_fares_enhanced.csv**: [Click here](https://drive.google.com/file/d/1NRr3bcLfb7ho9KORSVr1RGTAIJsL_Tnf/view?usp=drive_link)
 
 ---
 
