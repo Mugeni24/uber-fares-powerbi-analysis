@@ -1,15 +1,10 @@
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]([https://colab.research.google.com/your-notebook-url](https://colab.research.google.com/drive/11Y-qT8B_T7NQlpNfsatH6-rvdbSYFY7y?usp=sharing))
+
+
 # 🌌 Unveiling Uber's Fare Dynamics
 
-**Course:** Introduction to Big Data Analytics – INSY 8413  
-**Instructor:** Eric Maniraguha ([📧 eric.maniraguha@auca.ac.rw](mailto:eric.maniraguha@auca.ac.rw))  
-**Group:** B  
-**Tool:** Power BI Desktop  
-**Dataset Source:** [Uber Fares Dataset](https://www.kaggle.com/datasets/yasserh/uber-fares-dataset) (Kaggle)  
-**Student Name:** MUGENI Cynthia  
-**Student ID:** 26600  
-**GitHub Repository:** [Discover the Code](https://github.com/Mugeni24/uber-fares-powerbi-analysis)
 
----
 
 ## 🌠 Project Vision
 
@@ -40,6 +35,8 @@ Embark on an analytical voyage to decode the pulse of Uber’s fare ecosystem! T
 - **Transformation**: Standardized timestamps into datetime formats for seamless temporal analysis.
 
 ```python
+from google.colab import drive
+drive.mount('/content/drive')
 import pandas as pd
 import numpy as np
 
@@ -81,7 +78,19 @@ uber_df_clean.head()
 
 ![Cleaned Dataset](https://github.com/user-attachments/assets/f041c7cf-73be-4243-912a-5fb87de5c264)
 
+**Why this?**
+
+This cleans and prepares a raw Uber dataset for analysis. It filters out invalid and irrelevant data, such as trips with incorrect fares or coordinates outside of New York City. It then enriches the data by creating new features like the time of day and day of the week. Finally, it visualizes the cleaned data to reveal patterns and relationships, and saves the enhanced dataset for further use.
+
+### Now you can save the file as uber_fares_enhanced.csv.
+```python
+# Save the enhanced dataset
+uber_df_encoded.to_csv('uber_fares_enhanced.csv', index=False)
+
+print("Successfully saved the enhanced dataset to 'uber_fares_enhanced.csv'")
+```
 ---
+
 
 ### 3. 🌟 Feature Engineering
 The analysis reveals a strong correlation between fare amounts and trip distances, with most rides concentrated in Manhattan and fares typically under $20. Evening hours exhibit greater fare variability, hinting at surge pricing dynamics.
@@ -92,18 +101,68 @@ The analysis reveals a strong correlation between fare amounts and trip distance
 - **🔍 Insight**: Most rides are short, with fares under $20, but outliers suggest surge pricing or long-distance trips.  
 - **💡 Impact**: Highlights Uber’s focus on short trips, guiding pricing strategies and anomaly detection.
 
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(12, 6))
+
+plt.subplot(1, 2, 1)
+sns.boxplot(y=uber_df_cleaned['fare_amount'])
+plt.title('Boxplot of Fare Amount')
+
+plt.subplot(1, 2, 2)
+sns.boxplot(y=uber_df_cleaned['distance'])
+plt.title('Boxplot of Distance')
+
+plt.tight_layout()
+plt.show()
+```
+- **Output**:
 ![Fare and Distance](https://github.com/user-attachments/assets/1086d0d6-96c1-4515-8de6-857810a9eac2)
 
 #### b. Fare Range Analysis ($0–$100)
 - **🔍 Insight**: Fares predominantly fall in the $5–$10 range, with frequency decreasing as fares rise.  
 - **💡 Impact**: Reinforces Uber’s appeal for affordable rides, informing promotional strategies.
+```python
+# Filter out extreme outliers for a more informative visualization
+reasonable_fares = uber_df_cleaned[(uber_df_cleaned['fare_amount'] > 0) & (uber_df_cleaned['fare_amount'] <= 100)]
 
+plt.figure(figsize=(10, 6))
+sns.histplot(reasonable_fares['fare_amount'], bins=30, kde=True)
+plt.title('Distribution of Uber Fare Amounts (0 to $100)')
+plt.xlabel('Fare Amount ($)')
+plt.ylabel('Frequency')
+plt.show()
+```
+- **Output**:
 ![Fare Range](https://github.com/user-attachments/assets/39324b1f-a798-4fe6-8a21-f6dac9aa2251)
 
 #### c. Distance vs. Fare & Hourly Fare Trends
 - **🔍 Scatter Plot Insight**: A linear relationship confirms distance as a primary fare driver.  
 - **🔍 Boxplot Insight**: Evening hours show wider fare variability, likely due to surge pricing.  
 - **💡 Impact**: Validates pricing models and suggests dynamic driver allocation during peak hours.
+```python
+plt.figure(figsize=(15, 6))
+
+# Fare amount vs. distance
+plt.subplot(1, 2, 1)
+plt.scatter(reasonable_fares['distance'], reasonable_fares['fare_amount'], alpha=0.5)
+plt.title('Fare Amount vs. Distance')
+plt.xlabel('Distance (km)')
+plt.ylabel('Fare Amount ($)')
+
+# Fare amount vs. hour of the day
+plt.subplot(1, 2, 2)
+sns.boxplot(x=reasonable_fares['hour'], y=reasonable_fares['fare_amount'])
+plt.title('Fare Amount vs. Hour of the Day')
+plt.xlabel('Hour of the Day')
+plt.ylabel('Fare Amount ($)')
+
+plt.tight_layout()
+plt.show()
+```
+- **Output**:
 
 ![Distance vs Fare](https://github.com/user-attachments/assets/fe5f24b5-2ec6-42ae-9a89-18fd2c0d402d)
 
@@ -150,6 +209,13 @@ A constellation of visuals transforms data into compelling narratives, offering 
 ![Monthly Trends](https://github.com/user-attachments/assets/e75b2e1b-b559-4d23-9c9a-a7a07e89dfce)
 
 ---
+#### 🍩 Visual 6: Pick up Date Time by Day
+- **Type**: Donut Chart  
+- **Legend**: `Day`  
+- **Values**: `pickup_datetime`  
+- **Insight**: Highlights seasonal trends for strategic planning.
+<img width="259" height="201" alt="donut" src="https://github.com/user-attachments/assets/8b11847d-a44d-4031-9d91-e7f939507472" />
+
 
 ### 5. 🖼️ Interactive Dashboard
 - **Design**: A unified Power BI dashboard weaving all visuals into a seamless experience.  
