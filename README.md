@@ -260,7 +260,7 @@ Uber’s NYC data reflects the city's fast-paced lifestyle, where short, afforda
 ---
 
 ## 📦 Deliverables
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/11Y-qT8B_T7NQlpNfsatH6-rvdbSYFY7y?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/11Y-qT8B_T7NQlpNfsatH6-rvdbSYFY7y?usp=drive_link)
 - 📊 **Power BI Dashboard**: Interactive `.pbix` file  
 - 📁 **Dataset**: Cleaned dataset `uber_fares_enhanced.csv`  
 - 📓 **Jupyter Notebook**: Python code for data processing and visualization  
